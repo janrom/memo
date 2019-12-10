@@ -8,18 +8,20 @@
   },
   "main": "backend.js",
   "scripts": {
-    "start": "DEBUG=memo:* & node backend.js",
+    "start": "DEBUG=memo:* & nodemon backend.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Janne Romppanen",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.7.14"
   },
   "devDependencies": {
     "debug": "^4.1.1",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.1"
   }
 }
