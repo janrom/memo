@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _uniqueId from 'lodash.uniqueid';
+import Note from './Note';
 
-function ListNotes({ notes }) {
-  const mappedNotes = notes.map((note) => (
-    <div key={note.id}>
-      <h3>{note.heading}</h3>
-      <p>{note.content}</p>
-      <button type="button" id={note.updateId}>Update</button>
-      <button type="button" id={note.deleteId}>Delete</button>
-    </div>
-  ));
+function ListNotes({ notes, handleDelete }) {
+  const mappedNotes = notes.map((note) => {
+    return (
+      <Note
+        key={note._id}
+        id={note._id}
+        heading={note.heading}
+        content={note.content}
+        handleDelete={handleDelete}
+      />
+    );
+  });
 
   return (
     <div id="listNotes" className="col-4 container p-4">
@@ -21,6 +26,7 @@ function ListNotes({ notes }) {
 
 ListNotes.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export default ListNotes;
