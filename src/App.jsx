@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import _uniqueId from 'lodash.uniqueid';
+import React from 'react';
+import Note from './Note';
 import AddNote from './AddNote';
 import ListNotes from './ListNotes';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -11,37 +10,59 @@ class App extends React.Component {
       notes: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  componentDidMount() {
+    this.fetchNotes();
+  }
 
-    const note = {
+  componentDidUpdate(prevProps, prevState) {
+    // event after setState is finished
+  }
+
+  fetchNotes() {
+    fetch('http://localhost:3001/notes')
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.err) {
+          console.log('Error response from get /notes', json.err);
+          // FIXME
+          return alert('Fetching notes failed.');
+        }
+        console.log(json.notes);
+        this.setState({ notes: json.notes });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  // Create new note from user input.
+  handleSubmit(e) {
+    const note = Note({
       heading: e.target.heading.value,
       content: e.target.content.value,
-      id: _uniqueId('note-'),
-      updateId: _uniqueId('update-'),
-      deleteId: _uniqueId('delete-'),
-    };
-
-    e.target.heading.value = '';
-    e.target.content.value = '';
+    });
 
     this.setState((state) => (
       {
         notes: state.notes.concat([note]),
       }
-    ), () => {
-      // FIXME: show template
-      console.log('New note added.');
-    });
+    ));
+  }
+
+  // Delete the note which delete button is clicked
+  handleDelete(e) {
+    const { notes } = this.state;
+    const filteredNotes = notes.filter((note) => note._id !== e.target.value);
+
+    this.setState({ notes: filteredNotes });
   }
 
   render() {
     const { notes } = this.state;
     return (
       <>
-        <ListNotes notes={notes} />
+        <ListNotes notes={notes} handleDelete={this.handleDelete} />
         <AddNote onSubmit={this.handleSubmit} />
       </>
     );
