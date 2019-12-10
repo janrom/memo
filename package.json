@@ -2,9 +2,14 @@
   "name": "memo",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janrom/memo"
+  },
   "dependencies": {
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
     "lodash.uniqueid": "^4.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
