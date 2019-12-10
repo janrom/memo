@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janrom/memo"
+  },
+  "main": "backend.js",
+  "scripts": {
+    "start": "DEBUG=memo:* & node backend.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Janne Romppanen",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.14"
+  },
+  "devDependencies": {
+    "debug": "^4.1.1",
+    "morgan": "^1.9.1"
+  }
+}
