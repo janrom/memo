@@ -12,10 +12,19 @@ function Note({
   return (
     <div key={id}>
       <form onSubmit={handleUpdate}>
-        <input type="text" id={id} name="heading" value={heading} onChange={handleChange} />
-        <textarea id={id} name="content" value={content} onChange={handleChange} rows="5" />
-        <input type="submit" value="Update" />
-        <button type="button" name={id} onClick={handleDelete}>Delete</button>
+        <div className="form-group">
+          <input type="text" id={id} name="heading" value={heading} onChange={handleChange} className="form-control" />
+          <textarea id={id} name="content" value={content} onChange={handleChange} className="form-control" rows="5" />
+        </div>
+        <div className="row form-group">
+          <div className="col col-lg-2">
+            <input type="submit" value="Update" class="btn btn-primary" />
+          </div>
+          <div className="col col-log-8" />
+          <div className="col col-lg-2 align-self-end">
+            <button type="button" name={id} onClick={handleDelete} class="btn btn-danger">Delete</button>
+          </div>
+        </div>
       </form>
     </div>
   );

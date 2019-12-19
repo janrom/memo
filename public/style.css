@@ -2,8 +2,14 @@ div#listNotes {
   background-color: lightpink;
 }
 
-div#listNotes div:nth-of-type(2n+1) {
-  background-color: lightgrey;
+div#listNotes > div {	
+	border-bottom: 1px solid black;	
+	padding-top: 2em;
+	padding-bottom: 1em;
+}
+
+div#listNotes > div:last-child {
+	border-bottom: 0;
 }
 
 div#addNote {
