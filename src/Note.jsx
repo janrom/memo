@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import _uniqueId from 'lodash.uniqueid';
 
-function Note(props) {
-  const [heading, setHeading] = useState(props.heading);
-  const [content, setContent] = useState(props.content);
-  const { id, handleDelete } = props;
-
-  const handleUpdate = (e) => {
-    console.log('handleUpdate called in Note', e.target);
-  };
-
+function Note({
+  id,
+  heading,
+  content,
+  handleChange,
+  handleUpdate,
+  handleDelete,
+}) {
   return (
     <div key={id}>
-      <h3>{heading}</h3>
-      <p>{content}</p>
-      <button type="button" name="update" value={id} onClick={handleUpdate}>Update</button>
-      <button type="button" name="delete" value={id} onClick={handleDelete}>Delete</button>
+      <form onSubmit={handleUpdate}>
+        <input type="text" id={id} name="heading" value={heading} onChange={handleChange} />
+        <textarea id={id} name="content" value={content} onChange={handleChange} rows="5" />
+        <input type="submit" value="Update" />
+        <button type="button" name={id} onClick={handleDelete}>Delete</button>
+      </form>
     </div>
   );
 }
 
-Note.prototypes = {
-  id: PropTypes.number.isRequired,
+Note.propTypes = {
+  id: PropTypes.string.isRequired,
   heading: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };
 
